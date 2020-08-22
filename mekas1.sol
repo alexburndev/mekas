@@ -22,7 +22,7 @@ pragma solidity ^0.4.25;
 * [✓] 3%   Referal link or, if there is none, to support the project.
 *
 * Developed by Alex Burn.
-* https://github.com/alexburndev/dar/blob/master/newdar.sol
+* https://github.com/alexburndev/mekas/blob/master/mekas1.sol
 *
 */
 
