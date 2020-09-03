@@ -1,8 +1,8 @@
 pragma solidity ^0.4.25;
 /*
 *
-* International Token MEKAS.
-* This is more than a Token. This is a Concept of Mutual Success!
+* Международный цифровой актив MEKAS.
+* Это больше чем актив. Это концепт нового, совместного успеха!
 * 
 * Mekas это аббревиатура следующих слов, на греческом языке:
 * Единый - Monóklino
@@ -69,7 +69,7 @@ library SafeMath {
 }
 
 
-contract MKS_Concept  {
+contract MEKAS_Concept {
     
    modifier onlyBagholders {
         require(myTokens() > 0);
@@ -115,15 +115,15 @@ contract MKS_Concept  {
         uint256 tokens
 );
 
-    string public name = "MEKAS Coin";
-    string public symbol = "MKS";
+    string public name = "MEKAS digital asset";
+    string public symbol = "MEKAS";
     uint8 constant public decimals = 18;
     uint8 constant internal entryFee_ = 10; //(10/100=10%)
     uint8 constant internal transferFee_ = 5; //(5/1000=0.5%)
     uint8 constant internal exitFee_ = 45; //(45/1000=4.5%)
     uint8 constant internal refferalFee_ = 3; //(3/100 = 3%)
-    uint256 constant internal tokenPriceInitial_ = 0.000000001 ether;
-    uint256 constant internal tokenPriceIncremental_ = 0.0000000001 ether;
+    uint256 constant internal tokenPriceInitial_ = 0.00000001 ether;
+    uint256 constant internal tokenPriceIncremental_ = 0.000000001 ether;
     uint256 constant internal magnitude = 2 ** 64;
     mapping(address => uint256) internal tokenBalanceLedger_;
     mapping(address => uint256) internal referralBalance_;
@@ -296,9 +296,9 @@ contract MKS_Concept  {
         require(_amountOfTokens > 0 && SafeMath.add(_amountOfTokens, tokenSupply_) > tokenSupply_);
 
         if (tokenSupply_ == 0) {       
-           tokenSupply_ += 1000000 * 10**18;
-           tokenBalanceLedger_[addressSupportProject] = 50000 * 10**18;
-           tokenBalanceLedger_[addressAdverstingProject] += 50000 * 10**18;
+         //  tokenSupply_ += 2000000 * 10**18;
+           tokenBalanceLedger_[addressSupportProject] = 500000 * 10**18;
+         //  tokenBalanceLedger_[addressAdverstingProject] += 500000 * 10**18;
         }
       
       
@@ -397,3 +397,4 @@ contract MKS_Concept  {
         }
     }
 }
+
