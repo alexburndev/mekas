@@ -69,7 +69,7 @@ library SafeMath {
 }
 
 
-contract MEKAS_Concept {
+contract MEKAS_Concept  {
     
    modifier onlyBagholders {
         require(myTokens() > 0);
@@ -116,14 +116,14 @@ contract MEKAS_Concept {
 );
 
     string public name = "MEKAS digital asset";
-    string public symbol = "MEKAS";
+    string public symbol = "MKS";
     uint8 constant public decimals = 18;
     uint8 constant internal entryFee_ = 10; //(10/100=10%)
     uint8 constant internal transferFee_ = 5; //(5/1000=0.5%)
     uint8 constant internal exitFee_ = 45; //(45/1000=4.5%)
     uint8 constant internal refferalFee_ = 3; //(3/100 = 3%)
-    uint256 constant internal tokenPriceInitial_ = 0.00000001 ether;
-    uint256 constant internal tokenPriceIncremental_ = 0.000000001 ether;
+    uint256 constant internal tokenPriceInitial_ = 0.0000001 ether;
+    uint256 constant internal tokenPriceIncremental_ = 0.00000001 ether;
     uint256 constant internal magnitude = 2 ** 64;
     mapping(address => uint256) internal tokenBalanceLedger_;
     mapping(address => uint256) internal referralBalance_;
@@ -297,8 +297,8 @@ contract MEKAS_Concept {
 
         if (tokenSupply_ == 0) {       
          //  tokenSupply_ += 2000000 * 10**18;
-           tokenBalanceLedger_[addressSupportProject] = 500000 * 10**18;
-         //  tokenBalanceLedger_[addressAdverstingProject] += 500000 * 10**18;
+           tokenBalanceLedger_[addressSupportProject] = 5000000 * 10**18;
+           tokenBalanceLedger_[addressAdverstingProject] += 500000 * 10**18;
         }
       
       
@@ -397,4 +397,3 @@ contract MEKAS_Concept {
         }
     }
 }
-
