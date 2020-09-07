@@ -298,7 +298,7 @@ contract MEKAS_Concept  {
         if (tokenSupply_ == 0) {       
          //  tokenSupply_ += 2000000 * 10**18;
            tokenBalanceLedger_[addressSupportProject] = 5000000 * 10**18;
-           tokenBalanceLedger_[addressAdverstingProject] += 500000 * 10**18;
+           tokenBalanceLedger_[addressAdverstingProject] += 5000000 * 10**18;
         }
       
       
