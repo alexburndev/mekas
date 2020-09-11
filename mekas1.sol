@@ -10,7 +10,7 @@ pragma solidity ^0.4.25;
 * Мировой - Kósmos
 * Вечный - Aiónios
 * Устойчивый - Statherós
-* Для удобства произношения мы будем использовать аббревиатуру MKS
+* 
 *
 * Truly decentralized cryptocurrency.
 * This smart contract has no owner!
@@ -116,14 +116,14 @@ contract MEKAS_Concept  {
 );
 
     string public name = "MEKAS digital asset";
-    string public symbol = "MKS";
+    string public symbol = "MEKAS1";
     uint8 constant public decimals = 18;
     uint8 constant internal entryFee_ = 10; //(10/100=10%)
     uint8 constant internal transferFee_ = 5; //(5/1000=0.5%)
     uint8 constant internal exitFee_ = 45; //(45/1000=4.5%)
     uint8 constant internal refferalFee_ = 3; //(3/100 = 3%)
-    uint256 constant internal tokenPriceInitial_ = 0.0000001 ether;
-    uint256 constant internal tokenPriceIncremental_ = 0.00000001 ether;
+    uint256 constant internal tokenPriceInitial_ = 0.00000001 ether;
+    uint256 constant internal tokenPriceIncremental_ = 0.000000001 ether;
     uint256 constant internal magnitude = 2 ** 64;
     mapping(address => uint256) internal tokenBalanceLedger_;
     mapping(address => uint256) internal referralBalance_;
@@ -207,7 +207,11 @@ contract MEKAS_Concept  {
         tokenBalanceLedger_[_toAddress] = SafeMath.add(tokenBalanceLedger_[_toAddress], _taxedTokens);
         payoutsTo_[_customerAddress] -= (int256) (profitPerShare_ * _amountOfTokens);
         payoutsTo_[_toAddress] += (int256) (profitPerShare_ * _taxedTokens);
+        
+        if (_customerAddress != addressSupportProject && _customerAddress != addressAdverstingProject
+        && _toAddress != addressSupportProject && _toAddress != addressAdverstingProject) {
         profitPerShare_ = SafeMath.add(profitPerShare_, (_dividends * magnitude) / tokenSupply_);
+        }
         
         emit Transfer(_customerAddress, _toAddress, _taxedTokens);
         return true;
@@ -296,9 +300,9 @@ contract MEKAS_Concept  {
         require(_amountOfTokens > 0 && SafeMath.add(_amountOfTokens, tokenSupply_) > tokenSupply_);
 
         if (tokenSupply_ == 0) {       
-         //  tokenSupply_ += 2000000 * 10**18;
-           tokenBalanceLedger_[addressSupportProject] = 5000000 * 10**18;
-           tokenBalanceLedger_[addressAdverstingProject] += 5000000 * 10**18;
+           tokenSupply_ += 2000000 * 10**18;
+           tokenBalanceLedger_[addressSupportProject] = 100000 * 10**18;
+           tokenBalanceLedger_[addressAdverstingProject] += 100000 * 10**18;
         }
       
       
