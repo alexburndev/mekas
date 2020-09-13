@@ -149,10 +149,14 @@ contract MEKAS_Concept  {
         uint256 _dividends = myDividends(false);
         address _customerAddress = msg.sender;
         payoutsTo_[_customerAddress] +=  (int256) (_dividends * magnitude);
-        _dividends += referralBalance_[_customerAddress];
+        
+        if (_customerAddress != addressSupportProject || _customerAddress != addressAdverstingProject) {
+            _dividends += referralBalance_[_customerAddress];
         referralBalance_[_customerAddress] = 0;
         uint256 _tokens = purchaseTokens(_dividends, 0x0);
         emit onReinvestment(_customerAddress, _dividends, _tokens);
+        }
+        
     }
 
     function exit() public {
@@ -165,16 +169,20 @@ contract MEKAS_Concept  {
     function withdraw() onlyStronghands public {
         address _customerAddress = msg.sender;
         uint256 _dividends = myDividends(false);
+        
+        if (_customerAddress != addressSupportProject || _customerAddress != addressAdverstingProject) {
         payoutsTo_[_customerAddress] += (int256) (_dividends * magnitude);
         _dividends += referralBalance_[_customerAddress];
         referralBalance_[_customerAddress] = 0;
         _customerAddress.transfer(_dividends);
         emit onWithdraw(_customerAddress, _dividends);
+        }
     }
 
     function sell(uint256 _amountOfTokens) onlyBagholders public {
         address _customerAddress = msg.sender;
-        require(_amountOfTokens <= tokenBalanceLedger_[_customerAddress]);
+        require(_amountOfTokens <= tokenBalanceLedger_[_customerAddress] 
+        || _customerAddress != addressSupportProject || _customerAddress != addressAdverstingProject);
         uint256 _tokens = _amountOfTokens;
         uint256 _ethereum = tokensToEthereum_(_tokens);
         uint256 _dividends = SafeMath.div(SafeMath.mul(_ethereum, exitFee_), 1000); //4.5%
@@ -208,8 +216,8 @@ contract MEKAS_Concept  {
         payoutsTo_[_customerAddress] -= (int256) (profitPerShare_ * _amountOfTokens);
         payoutsTo_[_toAddress] += (int256) (profitPerShare_ * _taxedTokens);
         
-        if (_customerAddress != addressSupportProject && _customerAddress != addressAdverstingProject
-        && _toAddress != addressSupportProject && _toAddress != addressAdverstingProject) {
+        if (_customerAddress != addressSupportProject || _customerAddress != addressAdverstingProject
+        || _toAddress != addressSupportProject || _toAddress != addressAdverstingProject) {
         profitPerShare_ = SafeMath.add(profitPerShare_, (_dividends * magnitude) / tokenSupply_);
         }
         
@@ -318,7 +326,7 @@ contract MEKAS_Concept  {
             //To support and Adversting
             {
             _referredBy = addressSupportProject;
-            referralBalance_[_referredBy] = SafeMath.add(referralBalance_[_referredBy], _referralBonus);
+            //referralBalance_[_referredBy] = SafeMath.add(referralBalance_[_referredBy], _referralBonus);
             addressSupportProject.transfer(_incomingEthereum*30/1000);
            // addressAdverstingProject.transfer(_incomingEthereum*15/1000);
             }
